@@ -15,33 +15,40 @@ class convert
 {
 public:
 
-    void read_file() {
-        // platz reservieren
-        picture.reserve(height);
-        row.reserve(width);
-
-        // öffnen und schauen ob vorhanden
-        ifstream input_file("input.ppm");
-        if (!input_file.is_open()) {
-            cerr << "Fehler beim Öffnen der Datei." << endl;
-            return;
+    void read_file(const std::string& filename) {
+        std::ifstream file(filename, std::ios::binary);
+        if (!file) {
+            throw std::runtime_error("Konnte Datei nicht öffnen!");
         }
 
-        // Headline
-        input_file >> type;
-        input_file >> width >> height;
-        input_file >> colour_max;
+        skip_comments_and_whitespace(file);
+        file >> type;
+        skip_comments_and_whitespace(file);
+        file >> width >> height;
+        skip_comments_and_whitespace(file);
+        file >> colour_max;
 
-        // Picture
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                input_file >> pixel.r >> pixel.g >> pixel.b;
-                row.push_back(pixel);
-            }
-            picture.push_back(row);
-            row.clear();
+        if (type != "P3") {
+            throw std::runtime_error("Ungültiges Dateiformat!");
         }
-        input_file.close();
+
+        file.ignore(); // Skip single whitespace character
+
+        std::vector<std::vector<rgb>> image(height, std::vector<rgb>(width));
+        for (int i = 0; i < height; ++i) {
+            file.read(reinterpret_cast<char*>(image[i].data()), width * sizeof(rgb));
+        }
+
+        picture = image;
+    }
+
+    void skip_comments_and_whitespace(std::ifstream& file) {
+        char ch;
+        file >> std::ws; // Skip any whitespace
+        while (file.peek() == '#') { // Check for comment
+            file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            file >> std::ws; // Skip any whitespace
+        }
     }
 
     void write_file() {

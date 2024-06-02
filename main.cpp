@@ -13,7 +13,7 @@ int main() {
 
     // Durchlauf
     cout << "Read file...";
-    convert.read_file();
+    convert.read_file("./input.ppm");
     cout << "\r";
     cout << "Read done!     \n";
 
