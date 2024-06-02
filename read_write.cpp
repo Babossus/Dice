@@ -33,8 +33,8 @@ public:
         input_file >> colour_max;
 
         // Picture
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 input_file >> pixel.r >> pixel.g >> pixel.b;
                 row.push_back(pixel);
             }
@@ -51,11 +51,11 @@ public:
         output_file << width << " " << height << endl;
         output_file << colour_max;
         // Picture
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             output_file << endl;
             row.clear();
             row = picture[i];
-            for (int j = 0; j < row.size(); j++) {
+            for (int j = 0; j < width; j++) {
                 pixel = row[j];
                 output_file << pixel.r << " " << pixel.g << " " << pixel.b << " ";
             } 

@@ -18,8 +18,8 @@ public:
         height = convert.get_height();
         picture = convert.get_picture();
 
-        for (int i = 1; i < width - 1; i++) {
-            for (int j = 1; j < height - 1; j++) {
+        for (int i = 1; i < height - 1; i++) {
+            for (int j = 1; j < width - 1; j++) {
                 
                 // curnal x
                 pixel_x.r = (picture[i - 1][j - 1].r * - 1) + 
@@ -64,21 +64,23 @@ public:
                             (picture[i - 1][j + 1].b * 1) +
                             (picture[i][j + 1].b * 2) +
                             (picture[i + 1][j + 1].b * 1);
-
-                // vertikal und Horizontal zusammenführen
-                pixel.r = sqrt(pow(pixel_x.r, 2) +pow(pixel_y.r, 2));
-                pixel.g = sqrt(pow(pixel_x.g, 2) + pow(pixel_y.g, 2));
-                pixel.b = sqrt(pow(pixel_x.b, 2) + pow(pixel_y.b, 2));
                 
+                // vertikal und Horizontal zusammenführen
+                pixel.r = sqrt(pow(pixel_x.r, 2) + pow(pixel_y.r, 2));
+                pixel.g = sqrt(pow(pixel_x.g, 2) + pow(pixel_y.g, 2));
+                pixel.b = sqrt(pow(pixel_x.b, 2) + pow(pixel_y.b, 2));  
+
                 picture_row.push_back(pixel);
             }
-            
+
             picture_curnal.push_back(picture_row);
             picture_row.clear();
         }
+
         // jewils 2 entfernen da der rand nicht Bearbeitet wurde 
         height -= 2;
         width -= 2;
+        
 
 
     }
@@ -95,8 +97,8 @@ public:
         white.g = 255;
         white.b = 255;
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if ((picture_curnal[i][j].r + picture_curnal[i][j].g + picture_curnal[i][j].b) / 3 < 127) { // durchschnitt
 
                     picture_row.push_back(black);
@@ -182,7 +184,7 @@ public:
     void transfer(convert &convert) {
         convert.set_height(height);
         convert.set_width(width);
-        convert.set_picture(picture_curnal); // kommt auf stand an
+        convert.set_picture(picture_bw); // kommt auf stand an
     }
 
 private:

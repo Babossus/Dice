@@ -23,12 +23,12 @@ int main() {
     std::cout << "\r";
     cout << "Cournal done!      \n";
     
-    /*
+    
     cout << "Using black_white";
     mask.black_white();
     std::cout << "\r";
     cout << "Black_white done!      \n";
-    */
+    
     
     cout << "Transfer data...";
     mask.transfer(convert);
