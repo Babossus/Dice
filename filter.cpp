@@ -121,7 +121,7 @@ public:
         {
             for (int j = 0; j < width; j++)
             {
-                if (picture_bw[j][i].r == 255) // ppm_matrix[x][y]
+                if (picture_bw[i][j].r == 255) // ppm_matrix[x][y]*
                 {
                     coords.push_back(i);
                 }
@@ -133,7 +133,7 @@ public:
         {
             for (int j = 0; j < width; j++)
             {
-                if (picture_bw[j][i].r == 255)
+                if (picture_bw[i][j].r == 255)
                 {
                     coords.push_back(i);
                 }
@@ -145,7 +145,7 @@ public:
         {
             for (int j = 0; j < height; j++)
             {
-                if (picture_bw[i][j].r > 255)
+                if (picture_bw[j][i].r > 255)
                 {
                     coords.push_back(j);
                 }
@@ -157,7 +157,7 @@ public:
         {
             for (int j = 0; j < height; j++)
             {
-                if (picture_bw[i][j].r == 255)
+                if (picture_bw[j][i].r == 255)
                 {
                     coords.push_back(j);
                 }

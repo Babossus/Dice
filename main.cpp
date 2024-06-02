@@ -17,7 +17,7 @@ int main() {
     cout << "\r";
     cout << "Read done!     \n";
 
-    
+   
     cout << "Using Cournal...";
     mask.curnal(convert);
     std::cout << "\r";
@@ -29,13 +29,22 @@ int main() {
     std::cout << "\r";
     cout << "Black_white done!      \n";
     
-    
+
+    cout << "Find dice location...";
+    mask.mark_dice();
+    std::cout << "\r";
+    cout << "dice location found!      \n";
+
+
+    // liisflsd
+
+
     cout << "Transfer data...";
     mask.transfer(convert);
     std::cout << "\r";
     cout << "Transfer done!     \n";
     
-
+    
     cout << "Write file...";
     convert.write_file();
     std::cout << "\r";
