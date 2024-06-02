@@ -32,8 +32,6 @@ public:
             throw std::runtime_error("Ungültiges Dateiformat!");
         }
 
-        file.ignore(); // Skip single whitespace character
-
         std::vector<std::vector<rgb>> image(height, std::vector<rgb>(width));
         for (int i = 0; i < height; ++i) {
             file.read(reinterpret_cast<char*>(image[i].data()), width * sizeof(rgb));
@@ -44,10 +42,10 @@ public:
 
     void skip_comments_and_whitespace(std::ifstream& file) {
         char ch;
-        file >> std::ws; // Skip any whitespace
-        while (file.peek() == '#') { // Check for comment
+        file >> std::ws;
+        while (file.peek() == '#') {
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            file >> std::ws; // Skip any whitespace
+            file >> std::ws;
         }
     }
 
