@@ -13,41 +13,63 @@ int main() {
 
     // Durchlauf
     cout << "Read file...";
-    convert.read_file("./input.ppm");
+    convert.read_file("");
     cout << "\r";
     cout << "Read done!     \n";
 
-   
-    cout << "Using Cournal...";
-    mask.curnal(convert);
-    std::cout << "\r";
-    cout << "Cournal done!      \n";
-    
-    
-    cout << "Using black_white";
-    mask.black_white();
-    std::cout << "\r";
-    cout << "Black_white done!      \n";
-    
 
+    cout << "get Picture ...";
+    mask.get(convert);
+    cout << "\r";
+    cout << "get done!          \n";
+
+
+    
+    cout << "Using Cournal...";
+    mask.curnal();
+    cout << "\r";
+    cout << "Cournal done!      \n";
+
+    
+    cout << "Using black_white...";
+    mask.black_white(1);
+    cout << "\r";
+    cout << "Black_white done!      \n";
+
+    
+    /*
     cout << "Find dice location...";
     mask.mark_dice();
-    std::cout << "\r";
+    cout << "\r";
     cout << "dice location found!      \n";
 
-
-    // liisflsd
-
+    
+    cout << "Crop picture...";
+    mask.cut_dice();
+    cout << "\r";
+    cout << "Crop done!      \n";
+    
+    
+    cout << "Using black_white...";
+    mask.black_white(2);
+    cout << "\r";
+    cout << "Black_white done!      \n";
+    */
 
     cout << "Transfer data...";
     mask.transfer(convert);
-    std::cout << "\r";
+    cout << "\r";
     cout << "Transfer done!     \n";
+
+
+    cout << "Dice count: \n";
+    mask.Black_percentage();
+ 
     
     
     cout << "Write file...";
     convert.write_file();
-    std::cout << "\r";
+    cout << "\r";
     cout << "Write done!        \n";
 
 

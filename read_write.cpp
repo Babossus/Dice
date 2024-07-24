@@ -1,6 +1,8 @@
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -16,28 +18,43 @@ class convert
 public:
 
     void read_file(const std::string& filename) {
-        std::ifstream file(filename, std::ios::binary);
-        if (!file) {
-            throw std::runtime_error("Konnte Datei nicht öffnen!");
+        // platz reservieren
+        picture.reserve(height);
+        row.reserve(width);
+        
+        // adresse erstellen
+        srand(std::time(nullptr));
+        int rnd = rand() % 5;;
+        rnd++;
+        string end = ".ppm";
+
+        stringstream path_temp;
+        path_temp << rnd << end;
+        string path = path_temp.str();
+        //cout << rnd << endl;
+
+        // öffnen und schauen ob vorhanden
+        ifstream input_file("6.ppm"/*path*/);
+        if (!input_file.is_open()) {
+            cerr << "Fehler beim Öffnen der Datei." << endl;
+            return;
         }
 
-        skip_comments_and_whitespace(file);
-        file >> type;
-        skip_comments_and_whitespace(file);
-        file >> width >> height;
-        skip_comments_and_whitespace(file);
-        file >> colour_max;
+        // Headline
+        input_file >> type;
+        input_file >> width >> height;
+        input_file >> colour_max;
 
-        if (type != "P3") {
-            throw std::runtime_error("Ungültiges Dateiformat!");
+        // Picture
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                input_file >> pixel.r >> pixel.g >> pixel.b;
+                row.push_back(pixel);
+            }
+            picture.push_back(row);
+            row.clear();
         }
-
-        std::vector<std::vector<rgb>> image(height, std::vector<rgb>(width));
-        for (int i = 0; i < height; ++i) {
-            file.read(reinterpret_cast<char*>(image[i].data()), width * sizeof(rgb));
-        }
-
-        picture = image;
+        input_file.close();
     }
 
     void skip_comments_and_whitespace(std::ifstream& file) {
