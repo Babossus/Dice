@@ -34,7 +34,7 @@ public:
         //cout << rnd << endl;
 
         // öffnen und schauen ob vorhanden
-        ifstream input_file("6.ppm"/*path*/);
+        ifstream input_file("1.ppm"/*path*/);
         if (!input_file.is_open()) {
             cerr << "Fehler beim Öffnen der Datei." << endl;
             return;

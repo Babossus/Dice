@@ -24,37 +24,11 @@ int main() {
     cout << "get done!          \n";
 
 
-    
-    cout << "Using Cournal...";
-    mask.curnal();
-    cout << "\r";
-    cout << "Cournal done!      \n";
-
-    
     cout << "Using black_white...";
-    mask.black_white(1);
+    mask.black_white();
     cout << "\r";
     cout << "Black_white done!      \n";
 
-    
-    /*
-    cout << "Find dice location...";
-    mask.mark_dice();
-    cout << "\r";
-    cout << "dice location found!      \n";
-
-    
-    cout << "Crop picture...";
-    mask.cut_dice();
-    cout << "\r";
-    cout << "Crop done!      \n";
-    
-    
-    cout << "Using black_white...";
-    mask.black_white(2);
-    cout << "\r";
-    cout << "Black_white done!      \n";
-    */
 
     cout << "Transfer data...";
     mask.transfer(convert);
